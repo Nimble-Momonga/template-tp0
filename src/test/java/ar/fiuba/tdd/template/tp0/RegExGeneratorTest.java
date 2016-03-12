@@ -74,4 +74,9 @@ public class RegExGeneratorTest {
         assertTrue(validate(".*a?b+[cde]\\.", 50));
     }
 
+    @Test
+    public void testCharacterSetWithAsteriskQuantifier(){
+        assertTrue(validate("[abcde]*", 50));
+    }
+
 }
