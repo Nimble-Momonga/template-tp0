@@ -4,21 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegExGenerator {
-    // TODO: Uncomment this field
-    //private int maxLength;
+    private RegExParser regexParser;
 
-    //public RegExGenerator(int maxLength) {
-    //    this.maxLength = maxLength;
-    //}
+    public RegExGenerator() {
+        this.regexParser = new RegExParser();
+    }
 
-    // TODO: Uncomment parameters
-    public List<String> generate(/*String regEx, int numberOfResults*/) {
-        return new ArrayList<String>() {
-            {
-                add("a");
-                add("b");
-                add("c");
+    public List<String> generate(String regEx, int numberOfResults) {
+        List<RegExToken> tokens = this.regexParser.parseString(regEx);
+        ArrayList<String> matchedStrings = new ArrayList<String>();
+        for( int i = 0; i < numberOfResults; i++){
+            String matchedString = "";
+            for( RegExToken token: tokens){
+                matchedString += token.generate();
             }
-        };
+            matchedStrings.add(matchedString);
+        }
+        return matchedStrings;
     }
 }
