@@ -14,11 +14,11 @@ public class RegExGenerator {
         List<RegExToken> tokens = this.regexParser.parseString(regEx);
         ArrayList<String> matchedStrings = new ArrayList<String>();
         for ( int i = 0; i < numberOfResults; i++) {
-            String matchedString = "";
+            StringBuilder matchedString = new StringBuilder();
             for ( RegExToken token: tokens) {
-                matchedString += token.generate();
+                matchedString.append(token.generate());
             }
-            matchedStrings.add(matchedString);
+            matchedStrings.add(matchedString.toString());
         }
         return matchedStrings;
     }

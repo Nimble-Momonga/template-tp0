@@ -10,10 +10,10 @@ public class RegExLiteralToken extends RegExToken {
 
     public String generate() {
         int quantity = this.quantifier.generate();
-        String generatedString = "";
+        StringBuilder generatedString = new StringBuilder();
         for (int i = 0; i < quantity; i++) {
-            generatedString += this.token;
+            generatedString.append(this.token);
         }
-        return generatedString;
+        return generatedString.toString();
     }
 }
