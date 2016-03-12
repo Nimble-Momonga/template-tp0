@@ -10,7 +10,7 @@ public class RegExQuantifier {
     private int maxLength = 50;
     private Random random = new Random();
 
-    public RegExQuantifier(){
+    public RegExQuantifier() {
         this.quantifier = "";
     }
 

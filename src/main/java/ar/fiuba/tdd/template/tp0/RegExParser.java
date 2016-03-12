@@ -17,15 +17,15 @@ public class RegExParser {
         this.escaped = false;
     }
 
-    private int parseSet(int i) {
+    private int parseSet(int position) {
         StringBuilder str = new StringBuilder();
-        i++;
-        while (this.stringToParse.charAt(i) != ']') {
-            str.append(this.stringToParse.charAt(i));
-            i++;
+        position++;
+        while (this.stringToParse.charAt(position) != ']') {
+            str.append(this.stringToParse.charAt(position));
+            position++;
         }
         this.parsedString.add(new RegExSetToken(str.toString()));
-        return i;
+        return position;
     }
 
     private void parseLiteral(String character) {

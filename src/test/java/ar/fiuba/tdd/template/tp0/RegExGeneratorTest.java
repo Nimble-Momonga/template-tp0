@@ -60,22 +60,22 @@ public class RegExGeneratorTest {
     }
 
     @Test
-    public void testDotCharacterWithPlusQuantifier(){
+    public void testDotCharacterWithPlusQuantifier() {
         assertTrue(validate(".+", 50));
     }
 
     @Test
-    public void testDotCharacterWithAsteriskQuantifier(){
+    public void testDotCharacterWithAsteriskQuantifier() {
         assertTrue(validate(".*", 50));
     }
 
     @Test
-    public void testAllSpecialCharacters(){
+    public void testAllSpecialCharacters() {
         assertTrue(validate(".*a?b+[cde]\\.", 50));
     }
 
     @Test
-    public void testCharacterSetWithAsteriskQuantifier(){
+    public void testCharacterSetWithAsteriskQuantifier() {
         assertTrue(validate("[abcde]*", 50));
     }
 

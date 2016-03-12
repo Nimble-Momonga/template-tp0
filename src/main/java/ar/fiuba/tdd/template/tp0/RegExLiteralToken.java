@@ -9,9 +9,9 @@ public class RegExLiteralToken extends RegExToken {
     }
 
     public String generate() {
-        int q = this.quantifier.generate();
+        int quantity = this.quantifier.generate();
         String generatedString = "";
-        for (int i = 0; i < q; i++) {
+        for (int i = 0; i < quantity; i++) {
             generatedString += this.token;
         }
         return generatedString;
