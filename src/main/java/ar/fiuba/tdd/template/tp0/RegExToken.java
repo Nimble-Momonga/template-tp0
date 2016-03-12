@@ -7,12 +7,12 @@ abstract class RegExToken {
     protected String token;
     protected RegExQuantifier quantifier;
 
-    public RegExToken(String token){
+    public RegExToken(String token) {
         this.token = token;
         this.quantifier = new RegExQuantifier();
     }
 
-    public void setQuantifier(RegExQuantifier quantifier){
+    public void setQuantifier(RegExQuantifier quantifier) {
         this.quantifier = quantifier;
     }
 

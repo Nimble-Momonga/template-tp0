@@ -18,9 +18,9 @@ public class RegExQuantifier {
         this.quantifier = quantifier;
     }
 
-    public int generate(){
+    public int generate() {
         int generated;
-        switch(this.quantifier){
+        switch (this.quantifier) {
             case "+":
                 generated = this.random.nextInt(this.maxLength);
                 generated++;

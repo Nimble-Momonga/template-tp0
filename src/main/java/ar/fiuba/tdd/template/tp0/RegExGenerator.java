@@ -13,9 +13,9 @@ public class RegExGenerator {
     public List<String> generate(String regEx, int numberOfResults) {
         List<RegExToken> tokens = this.regexParser.parseString(regEx);
         ArrayList<String> matchedStrings = new ArrayList<String>();
-        for( int i = 0; i < numberOfResults; i++){
+        for ( int i = 0; i < numberOfResults; i++) {
             String matchedString = "";
-            for( RegExToken token: tokens){
+            for ( RegExToken token: tokens) {
                 matchedString += token.generate();
             }
             matchedStrings.add(matchedString);

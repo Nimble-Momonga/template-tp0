@@ -8,16 +8,16 @@ import java.util.Random;
 public class RegExSetToken extends RegExToken {
     private Random random;
 
-    public RegExSetToken(String token){
+    public RegExSetToken(String token) {
         super(token);
         this.random = new Random();
     }
 
-    public String generate(){
+    public String generate() {
         int setLength = this.token.length();
         int q = this.quantifier.generate();
         StringBuilder stringBuilder = new StringBuilder();
-        for(int i = 0; i < q; i++){
+        for (int i = 0; i < q; i++) {
             stringBuilder.append(this.token.charAt(random.nextInt(setLength)));
         }
         return stringBuilder.toString();
