@@ -8,14 +8,14 @@ public class RegExGenerator {
     private List<RegExToken> tokens;
     private ArrayList<String> matchedStrings;
 
-    private void parse(String regEx){
+    private void parse(String regEx) {
         this.tokens = REGEXPARSER.parseString(regEx);
         this.matchedStrings = new ArrayList<String>();
     }
 
-    private String generateSingleString(){
+    private String generateSingleString() {
         StringBuilder matchedString = new StringBuilder();
-        for (RegExToken token: this.tokens){
+        for (RegExToken token: this.tokens) {
             matchedString.append(token.generate());
         }
         return matchedString.toString();
