@@ -4,22 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegExGenerator {
-    private RegExParser regexParser;
+    private static RegExParser REGEXPARSER = new RegExParser();
+    private List<RegExToken> tokens;
+    private ArrayList<String> matchedStrings;
 
-    public RegExGenerator() {
-        this.regexParser = new RegExParser();
+    private void parse(String regEx){
+        this.tokens = REGEXPARSER.parseString(regEx);
+        this.matchedStrings = new ArrayList<String>();
+    }
+
+    private String generateSingleString(){
+        StringBuilder matchedString = new StringBuilder();
+        for (RegExToken token: this.tokens){
+            matchedString.append(token.generate());
+        }
+        return matchedString.toString();
     }
 
     public List<String> generate(String regEx, int numberOfResults) {
-        List<RegExToken> tokens = this.regexParser.parseString(regEx);
-        ArrayList<String> matchedStrings = new ArrayList<String>();
-        for ( int i = 0; i < numberOfResults; i++) {
-            StringBuilder matchedString = new StringBuilder();
-            for ( RegExToken token: tokens) {
-                matchedString.append(token.generate());
-            }
-            matchedStrings.add(matchedString.toString());
+        parse(regEx);
+        for (int i = 0; i < numberOfResults; i++) {
+            this.matchedStrings.add(generateSingleString());
         }
-        return matchedStrings;
+        return this.matchedStrings;
     }
 }
