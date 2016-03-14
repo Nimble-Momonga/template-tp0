@@ -9,12 +9,14 @@ import java.util.List;
 public class RegExParser {
     private String stringToParse;
     private ArrayList<RegExToken> parsedString;
-    private Boolean escaped;
+
+    private Boolean isQuantifier(String character) {
+        return (character.equals("+") || character.equals("*") || character.equals("?"));
+    }
 
     private void init(String string) {
         this.stringToParse = string;
         this.parsedString = new ArrayList<RegExToken>();
-        this.escaped = false;
     }
 
     private int parseSet(int position) {
@@ -24,37 +26,34 @@ public class RegExParser {
             str.append(this.stringToParse.charAt(position));
             position++;
         }
-        this.parsedString.add(new RegExSetToken(str.toString()));
+        parseLiteral(str.toString());
         return position;
     }
 
-    private void parseLiteral(String character) {
-        this.parsedString.add(new RegExLiteralToken(character));
+    private void parseLiteral(String token) {
+        this.parsedString.add(new RegExToken(token, true));
     }
 
-    private void parseChar(String character) {
-        if (character.equals("+") || character.equals("*") || character.equals("?")) {
+    private void parseChar(String token) {
+        if (isQuantifier(token)) {
             RegExToken lastToken = this.parsedString.get(this.parsedString.size() - 1);
-            lastToken.setQuantifier(new RegExQuantifier(character));
+            lastToken.setQuantifier(new RegExQuantifier(token));
         } else {
-            if (character.equals(".")) {
-                this.parsedString.add(new RegExDotToken());
-            } else {
-                this.parsedString.add(new RegExLiteralToken(character));
-            }
+            this.parsedString.add(new RegExToken(token, false));
         }
     }
 
     public List<RegExToken> parseString(String stringToParse) {
         init(stringToParse);
+        Boolean escaped = false;
         for (int i = 0; i < this.stringToParse.length(); i++) {
             String character = Character.toString(this.stringToParse.charAt(i));
-            if (this.escaped) {
+            if (escaped) {
                 parseLiteral(character);
-                this.escaped = false;
+                escaped = false;
             } else {
                 if (character.equals("\\")) {
-                    this.escaped = true;
+                    escaped = true;
                 } else {
                     if (character.equals("[")) {
                         i = parseSet(i);
